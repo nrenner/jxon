@@ -236,7 +236,7 @@
         elementNS = vValue[xmlns];
       }
 
-      return elementNS || oParentEl.namespaceURI;
+      return elementNS || oParentEl.lookupNamespaceURI(null);
     }
 
     function createElement(sName, vValue, oParentEl, oXMLDoc) {

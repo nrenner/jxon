@@ -235,5 +235,20 @@ describe('JXON', function() {
       var str2 = JXON.jsToString(obj);
       assert.equal(str1, str2);
     });
+    it('looks up the default namespace in the parent hierarchy', function() {
+      var obj = {
+        root: {
+          "$xmlns": "urn:default",
+          "$xmlns:foo": "urn:foo",
+          'foo:element': {
+              "a": "bar"
+          }
+        }
+      };
+      var xml = JXON.jsToXml(obj);
+      var a = xml.documentElement.firstChild.firstChild;
+      var str = JXON.xmlToString(xml);
+      assert.equal(str, '<root xmlns="urn:default" xmlns:foo="urn:foo"><foo:element><a>bar</a></foo:element></root>');
+    });
   });
 });
